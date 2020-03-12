@@ -4,6 +4,7 @@ import NewFilm from "./NewFilm.js";
 import HotFilm from "./HotFilm.js";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Player from "./Player.js";
+import RandomFilm from "./RandomFilm.js";
 class Home extends Component {
   render() {
     return (
@@ -75,22 +76,14 @@ class Home extends Component {
         <div id="main">
           <div className="container">
             <div id="main-content">
+            
+                <Player />
+
               <div className="movie-list-index home-v2">
-                <h2 className="header-list-index">
-                  <a
-                    className="more-list-index"
-                    href=""
-                    title="Phim sex không che"
-                  >
-                    Phim mới
-                  </a>
-                </h2>
-                <div className="last-film-box-wrapper">
-                  <ul className="last-film-box" id="movie-first-movie">
-                    <NewFilm />
-                  </ul>
-                </div>
+                <NewFilm />
+                <RandomFilm />
               </div>
+
               <div className="navigation">
                 <a
                   className="page-numbers"
@@ -186,7 +179,6 @@ function App() {
     <>
       <Router>
         <Route path="/" component={Home} />
-        
       </Router>
     </>
   );

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Player from "./Player";
 import Home from "./Home";
 
-class NewFilm extends Component {
+class RandomFilm extends Component {
   constructor() {
     super();
     this.state = { filmLists: [], isRoutes: false };
@@ -29,7 +29,7 @@ class NewFilm extends Component {
   render() {
     const currentPath = window.location.pathname;
 
-    if (currentPath.includes("/player")) {
+    if (!currentPath.includes("/player")) {
       return null;
     } else {
       var filmLists = this.state.filmLists;
@@ -37,7 +37,7 @@ class NewFilm extends Component {
         <>
           <h2 className="header-list-index">
             <a className="more-list-index" href="" title="Phim sex không che">
-              Phim mới
+              Phim Ngẫu nhiên
             </a>
           </h2>
           <div className="last-film-box-wrapper">
@@ -80,4 +80,4 @@ class NewFilm extends Component {
   }
 }
 
-export default NewFilm;
+export default RandomFilm;
