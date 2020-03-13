@@ -1,84 +1,135 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Home from "./Home";
+import NewFilm from "./NewFilm.js";
+import HotFilm from "./HotFilm.js";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useLocation
+} from "react-router-dom";
+import Video from "./Video.js";
+import RandomFilm from "./RandomFilm.js";
+import SideBar from "./SideBar.js";
+import Navigation from "./Navigation.js";
+
+/* function useQuery() {
+  return new URLSearchParams(useLocation().search);
+} */
 
 class Player extends Component {
+  constructor() {
+    super();
+    this.state = { filmLists: [] };
+    //this.handleRoutePage = this.handleRoutePage.bind(this);
+  }
+
+  componentDidMount() {
+    const match = this.props.match;
+    if (match) {
+      fetch(
+        `http://5e68e752d426c00016b7e858.mockapi.io/films/${match.params.id}`
+      )
+        .then(response => response.json())
+        .then(data =>
+          this.setState({
+            player: data
+          })
+        );
+      console.log("Test 02");
+    }
+    console.log("Test 022");
+  }
+
   render() {
     const currentPath = window.location.pathname;
-
     if (!currentPath.includes("/player")) {
       return null;
     } else {
-     
       return (
         <>
-          <div class="header-play">
-          <h1 className="header-title">
-            <a
-              title="Địt cô em họ lẳng lơ Nene Kinoshita"
-              href="http://javhd.pro/dit-co-em-ho-lang-lo-nene-kinoshita-1796.html"
-            >
-              Địt cô em họ lẳng lơ Nene Kinoshita
-            </a>
-          </h1>
-          <div id="video-entry">
-            <div id="video" data-id="1796" data-sv="1">
-              <video
-                poster="/path/to/poster.jpg"
-                id="player"
-                playsinline
-                controls
-                style={{width: "100%"}}
-              >
-                <source
-                  src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4"
-                  type="video/mp4"
-                />
-              </video>
+          <header id="header">
+            <div className="wrap cf">
+              <span className="header-icon-new" id="header-icon">
+                <span className="header-icon-new-top">
+                  <span className="line line-top "></span>
+                </span>
+                <span className="header-icon-new-bottom">
+                  <span className="line line-bottom "></span>
+                </span>
+              </span>
+              <div id="branding" className="text-branding" role="banner">
+                <div id="site-title">
+                  <a
+                    rel="home"
+                    href=""
+                    className="title"
+                    title="Xem Phim Sex Online Chất Lượng HD"
+                  >
+                    <img src="" alt="" />
+                    Logo
+                  </a>
+                </div>
+              </div>
+              <span className="search-icon" id="search-icon"></span>
+              <div className="menu-search">
+                <div className="searchform-div">
+                  <form
+                    method="get"
+                    id="form-search"
+                    className="searchform"
+                    action=""
+                  >
+                    <div className="search-text-div">
+                      <input
+                        type="text"
+                        name="keyword"
+                        className="search-text"
+                        value=""
+                        placeholder="Search"
+                        required=""
+                      />
+                      <input type="button" className="clean-button" />
+                      <input
+                        id="searchsubmit"
+                        type="submit"
+                        className="search-submit"
+                        value="Search"
+                      />
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <nav className="menu">
+                <ul>
+                  <li>
+                    <a href="">Login</a>
+                  </li>
+                  <li>
+                    <a href="">Logout</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </header>
+          <div id="main">
+            <div className="container">
+              <div id="main-content">
+                <Video player={this.state.player} />
+                <div className="movie-list-index home-v2">
+                  <RandomFilm />
+                </div>
+              </div>
+              <SideBar />
+              <div style={{ clear: "both" }}></div>
             </div>
           </div>
-          <div className="user-action">
-            <a
-              className="server active"
-              id="server1"
-              rel="nofollow"
-              href="javascript:void(0)"
-              onclick="if (!window.__cfRLUnblockHandlers) return false; server(1796,1)"
-            >
-              #1
-            </a>
-            <a
-              className="server"
-              id="server2"
-              rel="nofollow"
-              href="javascript:void(0)"
-              onclick="if (!window.__cfRLUnblockHandlers) return false; server(1796,2)"
-            >
-              #2
-            </a>
-            <a
-              className="server"
-              id="server3"
-              rel="nofollow"
-              href="javascript:void(0)"
-              onclick="if (!window.__cfRLUnblockHandlers) return false; server(1796,3)"
-            >
-              #3
-            </a>
-            <span className="icon-zoom">Zoom+</span>
-            <a
-              className="icon-dl"
-              rel="nofollow"
-              href="javascript:void(0)"
-              onclick="if (!window.__cfRLUnblockHandlers) return false; dlvideo(1796)"
-            >
-              Download
-            </a>
-            <span className="icon-view active">Views: 52,502</span>
-            <div id="show-dl"></div>         
-          </div>
-          </div>
+          <footer className="wrap">
+            <div className="copyright">
+              <div className="foot"></div>
+            </div>
+          </footer>
         </>
       );
     }
