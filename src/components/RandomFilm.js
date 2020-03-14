@@ -17,7 +17,7 @@ class RandomFilm extends Component {
 
   componentDidMount() {
 
-      fetch(`http://5e68e752d426c00016b7e858.mockapi.io/films`)
+      fetch(`http://5e68e752d426c00016b7e858.mockapi.io/randomfilm69`)
         .then(response => response.json())
         .then(data =>
           this.setState({

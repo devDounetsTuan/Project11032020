@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import NewFilm from "./NewFilm.js";
 import HotFilm from "./HotFilm.js";
+import Home from "./Home.js";
 import {
   BrowserRouter as Router,
   Switch,
@@ -26,6 +27,7 @@ class Player extends Component {
   }
 
   componentDidMount() {
+ 
     const match = this.props.match;
     if (match) {
       fetch(
@@ -43,6 +45,7 @@ class Player extends Component {
   }
 
   render() {
+   
     const currentPath = window.location.pathname;
     if (!currentPath.includes("/player")) {
       return null;

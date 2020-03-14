@@ -120,9 +120,13 @@ function App() {
   return (
     <>
       <Router>
-        <Route path="/" component={Home}></Route>
-        <Route path="/player/:id" component={Player} />
-      </Router>
+        <Route exact path="/" >
+          <Home/>
+        </Route>
+        <Route path="/player/:id">
+          <Player/>
+        </Route>
+        </Router>
     </>
   );
 }
